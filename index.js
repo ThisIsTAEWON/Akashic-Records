@@ -3,9 +3,9 @@ var app = express();
 
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = new Sequelize({
-    dialect: 'sqlite',
-    storage: 'database.sqlite'
-  });
+  dialect: 'sqlite',
+  storage: 'database.sqlite'
+});
 
 const Articles = sequelize.define('Articles', {
   title: {
@@ -82,12 +82,10 @@ app.get('/article/:title', async function(req, res) {
   res.render('article', { article: article });
 });
 
-app.get('/bootstrap', async function(req, res) {
-  res.render('bootstrap', { articles: await Articles.findAll() });
-});
-
 app.get('/create', async function(req, res) {
-  res.render('create')
+  res.render('create', {
+    thumbnailManual: '/views/img/thumbnail_manual.png'
+  })
 });
 
 app.post('/create', async function(req, res) {
