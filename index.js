@@ -56,14 +56,11 @@ const Articles = sequelize.define('Articles', {
 await Articles.sync();
 })();
 
-// req.body 오는 값을 읽기 위해 적용
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-// <%= %> 또는 <% %> 같이 html에서 js를 쓰기위한 ejs 라이브러리
 app.set('view engine', 'ejs');
 
-// index page
 app.get('/', async function(req, res) {
   res.render('index', { articles: await Articles.findAll() });
 });
