@@ -64,8 +64,17 @@ app.get('/', async function(req, res) {
   res.render('index', { articles: await Articles.findAll() });
 });
 
+app.get('/category/:category', async function(req, res) {
+  var articles = await Articles.findAll({
+    where: {
+      category: req.params.category
+    }
+  })
+  res.render('index', { articles: articles });
+});
+
 app.get('/article/:title', async function(req, res) {
-  const article = await Articles.findOne({
+  var article = await Articles.findOne({
     where: {
       title: req.params.title
     }
