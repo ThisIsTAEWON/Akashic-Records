@@ -1,7 +1,5 @@
 var express = require('express');
 var app = express();
-app.use(static(__dirname + '/app'));
-
 
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = new Sequelize({
