@@ -11,7 +11,7 @@
         padding: 0;
       }
       .rate {
-          float: left;
+          float: right;
           height: 46px;
           padding: 0 10px;
       }
@@ -45,10 +45,13 @@
       .rate label:hover ~ input:checked ~ label {
           color: #c59b08;
       }
+      select {
+        margin-left: 10px;
+      }
     </style>
     <title>레코드 작성중...</title>
 </head>
-<body>
+<body onload="caution()">
     <header>
       <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4" aria-label="Fourth navbar example">
         <div class="container-fluid">
@@ -66,11 +69,13 @@
                 <a class="nav-link" href="/create" method="get">기록하기</a>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
+                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">정렬</a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  <li><a class="dropdown-item" href="#">미구현</a></li>
+                  <li><a class="dropdown-item" href="#">타이틀순</a></li>
+                  <li><a class="dropdown-item" href="#">최신순</a></li>
+                  <li><a class="dropdown-item" href="#">오래된순</a></li>
+                  <li><a class="dropdown-item" href="#">추천순</a></li>
                 </ul>
               </li>
             </ul>
@@ -81,20 +86,53 @@
         </div>
       </nav>
 
-      <h3 class="pb-4 mb-4 fst-italic border-bottom">
+      <h3 class="pb-4 mb-4 border-bottom">
         레코드 작성
+        <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#createCautionModal">
+          작성시 유의사항
+        </button>
+        <div class="modal fade" id="createCautionModal" tabindex="-1" aria-labelledby="createCautionModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="createCautionModalLabel">작성시 유의사항</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <h2 class="fs-5">스포일러 주의</h2>
+                <p class="fs-6">아카식레코드는 작품에 대한 심도있는 고찰을 권장합니다. 작품의 내용을 마음껏 스포하세요! 대신 레코드를 열람할 때도 주의하셔야겠죠?</p>
+                <hr>
+                <h2 class="fs-5">타이틀</h2>
+                <p class="fs-6">버그가 있으니 타이틀에 특수기호 넣지마세요!! 【최애의 아이】 <-이거 쓰다가 데이터베이스 한 번 날렸습니다.</p>
+                <hr>
+                <h2 class="fs-5">작성자</h2>
+                <p class="fs-6">레코드의 작성자 이외에도 해당 레코드를 수정할 수 있습니다. 구현의 문제이니 해당 행위는 지양해주시길 바랍니다.</p>
+                <hr>
+                <h2 class="fs-5">썸네일 등록하기</h2>
+                <img src="/views/howtothumb.jpg">
+                <p class="fs-6">웹에 등록돼있는 이미지를 우클릭하여 이미지 주소를 가져오세요.</p>
+                <hr>
+                <h2 class="fs-5">카테고리</h2>
+                <p class="fs-6">카테고리는 수정할 때마다 초기화됩니다. 재지정해주세요.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">확인했습니다</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </h3>
     </header>
 
     <section>
-      <form class="row g-3" action="/create" method="post">
-        <div class=" col-12 mb-3">
+      <form class="row g-4 row-cols-1 ms-2" action="/create" method="post">
+        <div class=" col-md-12 mb-3">
           <label for="title" class="form-label">타이틀</label>
-          <input type="text" class="form-control" name="title" placeholder="제목을 입력하세요">
+          <input type="text" class="form-control" name="title" placeholder="타이틀을 입력하세요" required>
         </div>
 
         <div class="row">
-          <div class="col-6">
+          <div class="col-md-6">
             <div class="col-auto">
               <label for="username" class="col-form-label">작성자</label>
             </div>
@@ -103,7 +141,7 @@
             </div>
           </div>
   
-          <div class="col-6">
+          <div class="col-md-6">
             <div class="col-auto">
               <label for="thumbnail" class="col-form-label">썸네일</label>
             </div>
@@ -123,9 +161,9 @@
           <option value="게임">게임</option>
         </select>
 
-        <div class="rate g-col-6">
-          <div class="col">평점</div>
-          <div class="col">
+        <div class="rate col-md-2">
+          <div class="col-md-2">평점</div>
+          <div class="col-md-10">
             <input type="radio" id="star5" name="rating" value="5" />
             <label for="star5" title="text">5 stars</label>
             <input type="radio" id="star4" name="rating" value="4" />
@@ -139,14 +177,14 @@
           </div>
         </div>
 
-        <div class="mb-3 p-2 g-col-6">
+        <div class="mb-3 p-2 col-md-10">
           <label for="summary" class="form-label">한줄평</label>
-          <input type="text" class="form-control" name="summary" placeholder="한줄평">
+          <input type="text" class="form-control" name="summary" placeholder="요약, 한줄평, 명대사를 남겨보세요">
         </div>
 
         <div class="mb-3 p-2 g-col-6">
           <label for="content" class="form-label"></label>
-          <textarea class="form-control" name="content" rows="4" placeholder="작품에 대한 평가를 남겨보세요"></textarea>
+          <textarea class="form-control" name="content" rows="4" placeholder="작품에 대한 평가를 남겨보세요" required></textarea>
         </div>
 
         <input class="btn btn-dark" type="submit" value="등록">
@@ -160,7 +198,7 @@
           <li class="nav-item"><a href="/create" class="nav-link px-2 text-body-secondary">Record</a></li>
           <li class="nav-item"><a href="/" class="nav-link px-2 text-body-secondary">List</a></li>
           <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
+          <li class="nav-item"><a href="https://www.instagram.com/dgg_maru/" class="nav-link px-2 text-body-secondary">Suggestion</a></li>
         </ul>
         <p class="text-center text-body-secondary">© 2023, 202011397, Kdg</p>
       </footer>

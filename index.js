@@ -38,7 +38,7 @@ const Articles = sequelize.define('Articles', {
   rating: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    defaultValue: 1
+    defaultValue: 0
   },
   content: {
     type: DataTypes.STRING,
@@ -49,7 +49,6 @@ const Articles = sequelize.define('Articles', {
       }
     }
   },
-
 });
 
 (async() => {
@@ -71,11 +70,6 @@ app.get('/article/:title', async function(req, res) {
       title: req.params.title
     }
   })
-  if(article===null) {
-    console.log('Not found!')
-  } else {
-    console.log(article.updatedAt);
-  }
   res.render('article', { article: article });
 });
 
