@@ -1,6 +1,12 @@
 var express = require('express');
 var app = express();
 
+const { Sequelize, DataTypes } = require('sequelize');
+const sequelize = new Sequelize({
+  dialect: 'sqlite',
+  storage: 'database.sqlite'
+});
+
 const Articles = sequelize.define('Articles', {
   title: {
     type: DataTypes.STRING,
