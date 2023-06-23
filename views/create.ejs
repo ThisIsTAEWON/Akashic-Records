@@ -16,6 +16,7 @@
       *{
         margin: 0;
         padding: 0;
+        overflow-x: clip;
       }
       .rate {
           float: right;
@@ -58,7 +59,7 @@
     </style>
     <title>레코드 작성중...</title>
 </head>
-<body onload="caution()">
+<body>
     <header>
       <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4" aria-label="Fourth navbar example">
         <div class="container-fluid">
@@ -101,11 +102,11 @@
         <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#createCautionModal">
           작성시 유의사항
         </button>
-        <div class="modal fade" id="createCautionModal" tabindex="-1" aria-labelledby="createCautionModalLabel" aria-hidden="true">
+        <div class="modal fade" id="createCautionModal" tabindex="-1" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h1 class="modal-title fs-5" id="createCautionModalLabel">작성시 유의사항</h1>
+                <h1 class="modal-title fs-5">작성시 유의사항</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
@@ -116,14 +117,11 @@
                 <p class="fs-6">버그가 있으니 타이틀에 특수기호를 삽입하지 마세요. 괄호, 물음표 등도 포함이니 글자만 사용해주세요.</p>
                 <hr>
                 <h2 class="fs-5">작성자</h2>
-                <p class="fs-6">레코드의 작성자 이외에도 해당 레코드를 수정할 수 있습니다. 구현의 문제이니 해당 행위는 지양해주시길 바랍니다.</p>
+                <p class="fs-6">레코드의 작성자 이외에도 해당 레코드를 수정할 수 있습니다. 구현의 문제이니 해당 행위는 지양해주세요.</p>
                 <hr>
                 <h2 class="fs-5">썸네일 등록하기</h2>
                 <img src="https://i.pinimg.com/564x/1f/1c/1e/1f1c1e2b9ab996b3dca5f27f75f973f2.jpg">
                 <p class="fs-6">웹에 등록돼있는 이미지를 우클릭하여 이미지 주소를 가져오세요.</p>
-                <hr>
-                <h2 class="fs-5">카테고리</h2>
-                <p class="fs-6">카테고리는 수정할 때마다 초기화됩니다. 재지정해주세요.</p>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">확인</button>
@@ -162,7 +160,7 @@
         </div>
 
         <label for="category">카테고리</label>
-        <select class="form-select p-2 g-col-6" name="category" aria-label="Default select example">
+        <select class="form-select p-2 g-col-6" name="category">
           <option value="미분류" selected>미분류</option>
           <option value="영화">영화</option>
           <option value="드라마">드라마</option>
@@ -210,7 +208,7 @@
           <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
           <li class="nav-item"><a href="https://www.instagram.com/dgg_maru/" class="nav-link px-2 text-body-secondary">Suggestion</a></li>
         </ul>
-        <p class="text-center text-body-secondary">© 2023, 202011397, Kdg</p>
+        <p class="text-center text-body-secondary">© 컴퓨터인공지능공학과, 202011397, Kdg</p>
       </footer>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

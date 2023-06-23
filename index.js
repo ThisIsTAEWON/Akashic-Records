@@ -1,12 +1,6 @@
 var express = require('express');
 var app = express();
 
-const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = new Sequelize({
-  dialect: 'sqlite',
-  storage: 'database.sqlite'
-});
-
 const Articles = sequelize.define('Articles', {
   title: {
     type: DataTypes.STRING,
@@ -61,7 +55,9 @@ app.use(express.urlencoded({ extended: true }))
 app.set('view engine', 'ejs');
 
 app.get('/', async function(req, res) {
-  res.render('index', { articles: await Articles.findAll() });
+  res.render('index', {
+    articles: await Articles.findAll(),
+  });
 });
 
 app.get('/category/:category', async function(req, res) {
@@ -83,9 +79,7 @@ app.get('/article/:title', async function(req, res) {
 });
 
 app.get('/create', async function(req, res) {
-  res.render('create', {
-    thumbnailManual: '/views/img/thumbnail_manual.png'
-  })
+  res.render('create')
 });
 
 app.post('/create', async function(req, res) {
